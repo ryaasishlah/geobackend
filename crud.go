@@ -57,7 +57,7 @@ func DeleteGeojson(mconn *mongo.Database, collname string, userdata User) interf
 	return DeleteOneDoc(mconn, collname, filter)
 }
 
-func GeoIntersects(mconn *mongo.Database, collname string, coordinates Point) string {
+func GeoIntersects(mconn *mongo.Database, collname string, coordinates Polygon) string {
 	return GetGeoIntersectsDoc(mconn, collname, coordinates)
 }
 

@@ -76,12 +76,12 @@ func AmbilDataGeojson(mongoenv, dbname, collname string, r *http.Request) string
 }
 
 func PostGeoIntersects(mongoenv, dbname, collname string, r *http.Request) string {
-	var coordinate Point
+	var coordinates Polygon
 	var response Pesan
 	response.Status = false
 	mconn := SetConnection(mongoenv, dbname)
 
-	err := json.NewDecoder(r.Body).Decode(&coordinate)
+	err := json.NewDecoder(r.Body).Decode(&coordinates)
 
 	if err != nil {
 		response.Message = "Error parsing application/json: " + err.Error()
@@ -89,7 +89,7 @@ func PostGeoIntersects(mongoenv, dbname, collname string, r *http.Request) strin
 	}
 
 	response.Status = true
-	response.Message = GeoIntersects(mconn, collname, coordinate)
+	response.Message = GeoIntersects(mconn, collname, coordinates)
 	return ReturnStruct(response)
 }
 
