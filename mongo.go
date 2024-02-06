@@ -393,7 +393,7 @@ func GetCenterDoc(db *mongo.Database, collname string, coordinates Point) (resul
 	filter := bson.M{
 		"geometry": bson.M{
 			"$geoWithin": bson.M{
-				"$center": []interface{}{coordinates.Coordinates, 0.003},
+				"$center": []interface{}{coordinates.Coordinates, coordinates.Radius},
 			},
 		},
 	}
